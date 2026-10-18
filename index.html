@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YStudios — Estudio de Tatuaje</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --ink:#0c0a10; --ink2:#171320; --violet:#8b5cf6; --violet-deep:#4c1d95;
+  --lilac:#d8ccff; --paper:#f3f1f7; --line:rgba(243,241,247,.14);
+  --font-d:'Fraunces',Georgia,serif; --font-b:'Space Grotesk',system-ui,-apple-system,sans-serif;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px);scroll-behavior:smooth;}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0;}
+body{background:var(--ink);color:var(--paper);font-family:var(--font-b);line-height:1.6;-webkit-font-smoothing:antialiased;}
+img,svg{max-width:100%;display:block;}
+a{color:var(--lilac);}
+.container{max-width:860px;margin:0 auto;padding:0 24px;}
+.hidden{display:none !important;}
+
+/* nav */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(12,10,16,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+.navwrap{max-width:860px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--paper);}
+.brand span{font-family:var(--font-d);font-style:italic;font-size:1.3rem;letter-spacing:.3px;}
+nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+nav a{font-size:.92rem;color:var(--paper);text-decoration:none;opacity:.75;border-bottom:1px solid transparent;padding-bottom:2px;}
+nav a:hover,nav a.active{opacity:1;border-color:var(--violet);}
+.cart-pill{background:var(--violet);color:#fff;border-radius:100px;padding:6px 14px;font-size:.85rem;text-decoration:none;}
+
+/* sections */
+main{min-height:60vh;}
+.section{padding:56px 0 64px;}
+.eyebrow{color:var(--violet);font-size:.85rem;font-weight:500;}
+h1{font-family:var(--font-d);font-weight:500;font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.08;margin:10px 0 18px;max-width:14ch;}
+h2{font-family:var(--font-d);font-weight:500;font-size:clamp(1.6rem,4vw,2.2rem);font-style:italic;margin-bottom:8px;}
+p{max-width:62ch;color:#d8d3e0;}
+.lede{font-size:1.08rem;color:#e5e0ec;max-width:52ch;margin-bottom:26px;}
+.rule{border:none;border-top:1px solid var(--line);margin:32px 0;}
+.btn{display:inline-block;background:var(--violet);color:#fff;text-decoration:none;padding:13px 26px;border-radius:8px;font-weight:500;font-size:.95rem;border:none;cursor:pointer;font-family:var(--font-b);}
+.btn:hover{background:var(--violet-deep);}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--paper);}
+.btn-ghost:hover{border-color:var(--violet);}
+
+/* hero */
+.hero{padding-top:40px;position:relative;}
+.hero::before{content:"";position:absolute;top:-40px;right:-10%;width:260px;height:260px;background:radial-gradient(circle,var(--violet-deep),transparent 70%);opacity:.5;filter:blur(10px);z-index:-1;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;}
+
+/* category list — editorial, no cards */
+.cat-item{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:26px 0;border-top:1px solid var(--line);}
+.cat-item:last-child{border-bottom:1px solid var(--line);}
+.cat-icon{font-size:1.8rem;line-height:1;}
+.cat-item h3{font-family:var(--font-d);font-style:italic;font-weight:500;font-size:1.3rem;margin-bottom:6px;}
+.cat-item p{font-size:.95rem;margin-bottom:8px;}
+.cat-link{font-size:.85rem;text-decoration:none;color:var(--violet);}
+
+/* services table */
+.svc-row{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid var(--line);align-items:baseline;}
+.svc-row:last-child{border-bottom:1px solid var(--line);}
+.svc-name{font-weight:500;color:var(--paper);}
+.svc-desc{font-size:.85rem;color:#a89fb5;margin-top:2px;}
+.svc-price{white-space:nowrap;color:var(--lilac);font-weight:500;}
+
+/* store */
+.store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-top:20px;}
+.prod{border:1px solid var(--line);border-radius:10px;padding:18px;background:var(--ink2);}
+.prod .ic{font-size:1.7rem;margin-bottom:10px;}
+.prod h4{font-size:.95rem;margin-bottom:4px;}
+.prod .price{color:var(--lilac);font-size:.9rem;margin-bottom:10px;}
+.prod button{width:100%;padding:9px;border-radius:6px;border:1px solid var(--violet);background:transparent;color:var(--paper);font-family:var(--font-b);cursor:pointer;font-size:.85rem;}
+.prod button:hover{background:var(--violet);}
+.cart-box{margin-top:40px;border:1px solid var(--line);border-radius:10px;padding:22px;background:var(--ink2);}
+.cart-line{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:.9rem;gap:10px;}
+.cart-line:first-of-type{border-top:none;}
+.qty-btn{background:none;border:1px solid var(--line);color:var(--paper);border-radius:4px;width:24px;height:24px;cursor:pointer;font-family:var(--font-b);}
+.cart-total{display:flex;justify-content:space-between;font-weight:600;padding-top:14px;margin-top:6px;border-top:1px solid var(--line);}
+.remove{color:#c78;background:none;border:none;cursor:pointer;font-size:.8rem;text-decoration:underline;}
+
+/* forms */
+form{margin-top:22px;max-width:480px;}
+.field{margin-bottom:16px;}
+label{display:block;font-size:.85rem;margin-bottom:6px;color:#c9c1d6;}
+input,select,textarea{width:100%;background:var(--ink2);border:1px solid var(--line);color:var(--paper);padding:11px 12px;border-radius:7px;font-family:var(--font-b);font-size:.95rem;}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--violet);outline-offset:1px;border-color:var(--violet);}
+textarea{resize:vertical;min-height:90px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.confirm{display:none;margin-top:20px;padding:16px 18px;border:1px solid var(--violet);border-radius:8px;background:rgba(139,92,246,.1);font-size:.92rem;}
+.confirm.show{display:block;}
+
+/* info block */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px;}
+.info-grid h4{font-size:.85rem;color:var(--violet);margin-bottom:6px;}
+.info-grid p{font-size:.92rem;margin-bottom:0;}
+.social-row{display:flex;gap:14px;margin-top:14px;}
+.social-row a{border:1px solid var(--line);border-radius:100px;padding:7px 16px;font-size:.85rem;text-decoration:none;}
+
+footer{border-top:1px solid var(--line);padding:30px 0 calc(30px + env(safe-area-inset-bottom,0px));}
+.foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.82rem;color:#8a8194;}
+
+.tk{border:1px solid var(--line);border-radius:10px;padding:18px;background:var(--ink2);margin-top:14px;}
+.tk h4{font-size:1rem;margin-bottom:4px;}
+.tk-meta{font-size:.85rem;color:#a89fb5;margin-bottom:8px;}
+.badge{display:inline-block;font-size:.75rem;padding:2px 10px;border-radius:100px;border:1px solid var(--line);margin-left:8px;font-weight:400;}
+.badge.aceptada{border-color:#6ee7a0;color:#6ee7a0;}
+.badge.rechazada{border-color:#f0909f;color:#f0909f;}
+.badge.pendiente{border-color:var(--violet);color:var(--lilac);}
+.chat{margin-top:12px;border-top:1px solid var(--line);padding-top:12px;}
+.msgs{max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+.msg{max-width:80%;padding:8px 12px;border-radius:10px;font-size:.88rem;background:var(--ink);border:1px solid var(--line);align-self:flex-start;}
+.msg.me{align-self:flex-end;background:var(--violet-deep);border-color:var(--violet);}
+.msg.sys{align-self:center;font-size:.78rem;color:#a89fb5;border:none;background:none;}
+.chat-form{display:flex;gap:8px;margin:0;max-width:none;}
+.chat-form input{flex:1;}
+.tk-actions{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;}
+@media(max-width:520px){
+  .two-col{grid-template-columns:1fr;}
+  .info-grid{grid-template-columns:1fr;}
+  nav{gap:12px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navwrap">
+    <a href="#inicio" class="brand" onclick="showSection('inicio');return false;">
+      <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8ccff"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs><circle cx="50" cy="50" r="45" fill="none" stroke="url(#lg)" stroke-width="4"/><text x="50" y="67" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="52" fill="url(#lg)">Y</text></svg>
+      <span>YStudios</span>
+    </a>
+    <nav id="mainnav">
+      <a href="#inicio" onclick="showSection('inicio');return false;">Inicio</a>
+      <a href="#categorias" onclick="showSection('categorias');return false;">Estilos</a>
+      <a href="#servicios" onclick="showSection('servicios');return false;">Servicios</a>
+      <a href="#tienda" onclick="showSection('tienda');return false;">Tienda</a>
+      <a href="#micita" onclick="showSection('micita');return false;">Mi cita</a>
+      <a href="#contacto" onclick="showSection('contacto');return false;">Contacto</a>
+      <a href="#reservar" class="cart-pill" onclick="showSection('reservar');return false;">Reservar cita</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <section id="inicio" class="section hero">
+    <p class="eyebrow">Estudio de tatuaje · Madrid</p>
+    <h1>Piel como lienzo, tinta como firma.</h1>
+    <p class="lede">YStudios es un estudio de tatuaje especializado en línea fina: trazos delicados, detalles pequeños y diseños pensados uno a uno antes de tocar la piel. Trabajamos con cita previa para dedicar a cada proyecto el tiempo que merece.</p>
+    <div class="hero-actions">
+      <button class="btn" onclick="showSection('reservar')">Reservar una cita</button>
+      <button class="btn btn-ghost" onclick="showSection('categorias')">Ver estilos</button>
+    </div>
+    <hr class="rule">
+    <h2>Sobre el estudio</h2>
+    <p>De momento en YStudios solo se tatúa línea fina, y esa especialización marca todo el proceso: hablamos de la idea, del lugar del cuerpo y del tamaño antes de dibujar. El resultado son piezas delicadas, pensadas a medida y nunca calcadas de un catálogo.</p>
+  </section>
+
+  <section id="categorias" class="section hidden">
+    <p class="eyebrow">Nuestros estilos</p>
+    <h2 style="font-size:clamp(1.8rem,5vw,2.4rem)">Cinco formas de línea fina</h2>
+    <p class="lede">Todos nuestros estilos se trabajan con trazo fino. Elige el que más se acerque a tu idea y lo afinamos juntos en la cita de diseño.</p>
+    <div id="catlist"></div>
+  </section>
+
+  <section id="servicios" class="section hidden">
+    <p class="eyebrow">Productos y servicios</p>
+    <h2 style="font-size:clamp(1.8rem,5vw,2.4rem)">Qué ofrecemos</h2>
+    <p class="lede">Precios orientativos; el presupuesto final depende del tamaño, la técnica y la zona del cuerpo.</p>
+    <div id="svclist"></div>
+  </section>
+
+  <section id="tienda" class="section hidden">
+    <p class="eyebrow">Tienda online</p>
+    <h2 style="font-size:clamp(1.8rem,5vw,2.4rem)">Merchandising y cuidado</h2>
+    <p class="lede">Producto de estudio para llevar la marca puesta y cuidar el tatuaje una vez hecho.</p>
+    <div class="store-grid" id="storegrid"></div>
+    <div class="cart-box">
+      <h3 style="font-family:var(--font-d);font-style:italic;font-weight:500;margin-bottom:14px;">Tu carrito</h3>
+      <div id="cartlines"><p style="font-size:.9rem;color:#a89fb5;">Aún no has añadido productos.</p></div>
+      <div id="carttotal"></div>
+      <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn" onclick="checkout()">Finalizar pedido</button>
+        <button class="btn btn-ghost" onclick="clearCart()">Vaciar carrito</button>
+      </div>
+      <div class="confirm" id="orderConfirm"></div>
+    </div>
+  </section>
+
+  <section id="reservar" class="section hidden">
+    <p class="eyebrow">Cita previa</p>
+    <h2 style="font-size:clamp(1.8rem,5vw,2.4rem)">Reserva tu sesión</h2>
+    <p class="lede">Cuéntanos tu idea y elige estilo, fecha y hora. Al enviar, se abrirá tu app de correo con la solicitud lista para mandar.</p>
+    <form id="bookingForm">
+      <div class="two-col">
+        <div class="field"><label for="bNombre">Nombre</label><input id="bNombre" required></div>
+        <div class="field"><label for="bEmail">Email</label><input id="bEmail" type="email" required></div>
+      </div>
+      <div class="field"><label for="bEstilo">Estilo</label><select id="bEstilo"></select></div>
+      <div class="two-col">
+        <div class="field"><label for="bFecha">Fecha</label><input id="bFecha" type="date" required></div>
+        <div class="field"><label for="bHora">Hora</label>
+          <select id="bHora"><option>11:00</option><option>13:00</option><option>16:00</option><option>18:00</option></select>
+        </div>
+      </div>
+      <div class="field"><label for="bMsg">Cuéntanos tu idea</label><textarea id="bMsg" placeholder="Tamaño aproximado, zona del cuerpo, referencias..."></textarea></div>
+      <button class="btn" type="submit">Confirmar solicitud</button>
+    </form>
+    <div class="confirm" id="bookingConfirm"></div>
+  </section>
+
+  <section id="contacto" class="section hidden">
+    <p class="eyebrow">Contacto</p>
+    <h2 style="font-size:clamp(1.8rem,5vw,2.4rem)">Escríbenos</h2>
+    <p class="lede">Para dudas rápidas antes de reservar, o si prefieres resolverlo por email.</p>
+    <form id="contactForm">
+      <div class="field"><label for="cNombre">Nombre</label><input id="cNombre" required></div>
+      <div class="field"><label for="cEmail">Email</label><input id="cEmail" type="email" required></div>
+      <div class="field"><label for="cAsunto">Asunto</label><input id="cAsunto"></div>
+      <div class="field"><label for="cMsg">Mensaje</label><textarea id="cMsg" required></textarea></div>
+      <button class="btn" type="submit">Enviar mensaje</button>
+    </form>
+    <div class="confirm" id="contactConfirm"></div>
+    <hr class="rule">
+    <div class="info-grid">
+      <div><h4>Dirección</h4><p>Calle del Grabado 12, Madrid</p></div>
+      <div><h4>Horario</h4><p>Martes a sábado, 11:00–20:00</p></div>
+      <div><h4>Teléfono</h4><p>+34 611 22 33 44</p></div>
+      <div><h4>Email</h4><p><a href="mailto:yaareetgl2@gmail.com">yaareetgl2@gmail.com</a></p></div>
+    </div>
+    <div class="social-row">
+      <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://maps.google.com" target="_blank" rel="noopener">Google Maps</a>
+    </div>
+  </section>
+
+  <section id="micita" class="section hidden">
+    <p class="eyebrow">Mis citas</p>
+    <h2 style="font-size:clamp(1.8rem,5vw,2.4rem)">Estado de tu cita</h2>
+    <p class="lede">Aquí ves si tu solicitud ha sido aceptada y, cuando lo esté, puedes hablar con el estudio por chat.</p>
+    <div id="mytickets"></div>
+  </section>
+
+  <section id="admin" class="section hidden">
+    <p class="eyebrow">Zona privada</p>
+    <h2 style="font-size:clamp(1.8rem,5vw,2.4rem)">Panel de administración</h2>
+    <div id="adminGate">
+      <p class="lede">Acceso solo para administradores.</p>
+      <form id="loginForm"><div class="field"><label for="aPass">Contraseña</label><input id="aPass" type="password" required></div><button class="btn" type="submit">Entrar</button></form>
+      <div class="confirm" id="loginErr">Contraseña incorrecta.</div>
+    </div>
+    <div id="adminPanel" class="hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:14px 0 6px;">
+        <div id="adminFilters" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+        <button class="btn btn-ghost" onclick="adminLogout()">Salir</button>
+      </div>
+      <div id="adminTickets"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot-row">
+    <span>© 2026 YStudios Tattoo Studio</span>
+    <span>Cita previa obligatoria · Mayores de 18 años · <a href="#admin" onclick="showSection('admin');return false;" style="color:inherit;">Acceso administradores</a></span>
+  </div>
+</footer>
+
+<script>
+const CATS=[
+ {id:'minimalista',ic:'✒️',t:'Minimalista',d:'Símbolos, iniciales y detalles diminutos en trazo muy fino, ideales para una primera pieza discreta.'},
+ {id:'floral',ic:'🌿',t:'Floral y botánico',d:'Ramas, flores y hojas dibujadas con línea delicada, con un acabado ligero y natural.'},
+ {id:'lettering',ic:'✍️',t:'Lettering',d:'Frases, nombres y fechas escritos a mano en trazo fino, con una caligrafía cuidada.'},
+ {id:'continua',ic:'〰️',t:'Línea continua',d:'Figuras y siluetas dibujadas con un único trazo continuo, de resultado elegante y muy limpio.'},
+ {id:'geometrico',ic:'✨',t:'Geométrico y constelaciones',d:'Formas simples, líneas y puntos que componen constelaciones o diseños geométricos ligeros.'}
+];
+const SVC=[
+ {n:'Tatuaje mini',d:'Hasta 3 cm, línea fina',p:'desde 40€'},
+ {n:'Tatuaje pequeño',d:'Entre 3 y 7 cm',p:'desde 70€'},
+ {n:'Tatuaje mediano',d:'Entre 7 y 12 cm',p:'desde 120€'},
+ {n:'Retoque',d:'Dentro de los 3 primeros meses',p:'gratuito'},
+ {n:'Diseño personalizado',d:'Se descuenta del precio final',p:'30€'}
+];
+const PROD=[
+ {id:'p1',ic:'👕',n:'Camiseta YStudios',p:24.9},
+ {id:'p2',ic:'🧴',n:'Crema cicatrizante',p:12.5},
+ {id:'p3',ic:'🎁',n:'Tarjeta regalo 50€',p:50},
+ {id:'p4',ic:'🖼️',n:'Lámina de diseño',p:35},
+ {id:'p5',ic:'📓',n:'Kit post-tatuaje',p:19.9}
+];
+
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  document.querySelectorAll('#mainnav a').forEach(a=>a.classList.remove('active'));
+  const link=document.querySelector('#mainnav a[href="#'+id+'"]');
+  if(link) link.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  history.replaceState(null,'','#'+id);
+}
+
+function renderCats(){
+  const box=document.getElementById('catlist');
+  box.innerHTML=CATS.map((c,i)=>{
+    const next=CATS[(i+1)%CATS.length];
+    return '<div class="cat-item" id="cat-'+c.id+'"><div class="cat-icon">'+c.ic+'</div><div><h3>'+c.t+'</h3><p>'+c.d+
+      '</p><a class="cat-link" href="#" onclick="preselect(\''+c.id+'\');return false;">Reservar en '+c.t+' →</a>'+
+      ' &nbsp;·&nbsp; <a class="cat-link" href="#" onclick="document.getElementById(\'cat-'+next.id+'\').scrollIntoView({behavior:\'smooth\'});return false;">Siguiente: '+next.t+'</a></div></div>';
+  }).join('');
+  const bEstilo=document.getElementById('bEstilo');
+  bEstilo.innerHTML=CATS.map(c=>'<option value="'+c.id+'">'+c.t+'</option>').join('');
+}
+function preselect(id){
+  showSection('reservar');
+  document.getElementById('bEstilo').value=id;
+}
+
+function renderSvc(){
+  document.getElementById('svclist').innerHTML=SVC.map(s=>
+    '<div class="svc-row"><div><div class="svc-name">'+s.n+'</div><div class="svc-desc">'+s.d+'</div></div><div class="svc-price">'+s.p+'</div></div>'
+  ).join('');
+}
+
+function renderStore(){
+  document.getElementById('storegrid').innerHTML=PROD.map(p=>
+    '<div class="prod"><div class="ic">'+p.ic+'</div><h4>'+p.n+'</h4><div class="price">'+p.p.toFixed(2)+'€</div><button onclick="addToCart(\''+p.id+'\')">Añadir</button></div>'
+  ).join('');
+}
+
+function getCart(){try{return JSON.parse(localStorage.getItem('ys_cart')||'[]');}catch(e){return [];}}
+function setCart(c){try{localStorage.setItem('ys_cart',JSON.stringify(c));}catch(e){}}
+function addToCart(id){
+  const cart=getCart();const prod=PROD.find(p=>p.id===id);
+  const line=cart.find(l=>l.id===id);
+  if(line) line.qty++; else cart.push({id:id,qty:1});
+  setCart(cart);renderCart();
+}
+function changeQty(id,delta){
+  let cart=getCart();const line=cart.find(l=>l.id===id);
+  if(!line) return;
+  line.qty+=delta;
+  if(line.qty<=0) cart=cart.filter(l=>l.id!==id);
+  setCart(cart);renderCart();
+}
+function clearCart(){setCart([]);renderCart();document.getElementById('orderConfirm').classList.remove('show');}
+function renderCart(){
+  const cart=getCart();const box=document.getElementById('cartlines');
+  if(!cart.length){box.innerHTML='<p style="font-size:.9rem;color:#a89fb5;">Aún no has añadido productos.</p>';document.getElementById('carttotal').innerHTML='';return;}
+  let total=0;
+  box.innerHTML=cart.map(l=>{
+    const p=PROD.find(x=>x.id===l.id);const sub=p.p*l.qty;total+=sub;
+    return '<div class="cart-line"><span>'+p.n+'</span><span style="display:flex;align-items:center;gap:8px;"><button class="qty-btn" onclick="changeQty(\''+l.id+'\',-1)">−</button>'+l.qty+'<button class="qty-btn" onclick="changeQty(\''+l.id+'\',1)">+</button></span><span>'+sub.toFixed(2)+'€</span><button class="remove" onclick="changeQty(\''+l.id+'\',-999)">quitar</button></div>';
+  }).join('');
+  document.getElementById('carttotal').innerHTML='<div class="cart-total"><span>Total</span><span>'+total.toFixed(2)+'€</span></div>';
+}
+function checkout(){
+  const cart=getCart();
+  if(!cart.length) return;
+  const ref='YS'+Math.floor(10000+Math.random()*89999);
+  document.getElementById('orderConfirm').className='confirm show';
+  document.getElementById('orderConfirm').textContent='Pedido registrado con referencia '+ref+'. Te escribiremos para confirmar el pago y la recogida en el estudio.';
+  setCart([]);renderCart();
+}
+
+const MAIL='yaareetgl2@gmail.com';
+var lastMail=null;
+function openMail(subject,body){
+  window.location.href='mailto:'+MAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+}
+function showMailNotice(id,subject,body){
+  lastMail={subject:subject,body:body};
+  const box=document.getElementById(id);
+  box.className='confirm show';
+  box.innerHTML='Casi listo: se ha abierto tu app de correo con el mensaje preparado. <strong>Pulsa enviar</strong> para que llegue a YStudios. ¿No se ha abierto? <a href="#" onclick="openMail(lastMail.subject,lastMail.body);return false;">Abrir de nuevo</a> o escribe a '+MAIL+'.';
+  openMail(subject,body);
+}
+const val=id=>document.getElementById(id).value;
+document.getElementById('bookingForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const estilo=CATS.find(c=>c.id===val('bEstilo')).t;
+  const id='T'+Date.now().toString(36).toUpperCase();
+  const all=readJSON('ys_tickets');
+  all.push({id:id,nombre:val('bNombre'),email:val('bEmail'),estilo:estilo,fecha:val('bFecha'),hora:val('bHora'),idea:val('bMsg'),estado:'pendiente',msgs:[]});
+  writeJSON('ys_tickets',all);
+  const my=readJSON('ys_mine');my.push(id);writeJSON('ys_mine',my);
+  renderAll();
+  showMailNotice('bookingConfirm','Nueva cita YStudios: '+val('bNombre'),
+    'Nombre: '+val('bNombre')+'\nEmail: '+val('bEmail')+'\nEstilo: '+estilo+'\nFecha: '+val('bFecha')+'\nHora: '+val('bHora')+'\n\nIdea:\n'+(val('bMsg')||'(sin descripción)'));
+  document.getElementById('bookingConfirm').innerHTML+=' Tu cita ('+id+') ya aparece en <a href="#" onclick="showSection(\'micita\');return false;">Mi cita</a>.';
+  this.reset();
+});
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  showMailNotice('contactConfirm','Mensaje web YStudios: '+(val('cAsunto')||val('cNombre')),
+    'Nombre: '+val('cNombre')+'\nEmail: '+val('cEmail')+'\n\n'+val('cMsg'));
+  this.reset();
+});
+
+const ADMIN_HASH='8349dde647a59e01c287f3b8d29975a0ccc6587d322671f39bca634dc3e6ad6b';
+const ESTADO={pendiente:'Pendiente',aceptada:'Aceptada',rechazada:'Rechazada'};
+let adminFilter='pendiente';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function readJSON(k){try{return JSON.parse(localStorage.getItem(k)||'[]');}catch(e){return [];}}
+function writeJSON(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function isAdmin(){try{return sessionStorage.getItem('ys_admin')==='1';}catch(e){return false;}}
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+
+function chatHtml(t,who){
+  const msgs=t.msgs.map(m=>'<div class="msg '+(m.from==='sistema'?'sys':m.from===who?'me':'')+'">'+esc(m.text)+'</div>').join('');
+  return '<div class="chat"><div class="msgs">'+msgs+'</div><form class="chat-form" onsubmit="sendMsg(event,\''+t.id+'\',\''+who+'\')"><input placeholder="Escribe un mensaje" aria-label="Mensaje" required><button class="btn" type="submit">Enviar</button></form></div>';
+}
+function sendMsg(e,id,who){
+  e.preventDefault();
+  if(who==='admin'&&!isAdmin()) return;
+  const text=e.target.querySelector('input').value.trim();
+  const all=readJSON('ys_tickets');const t=all.find(x=>x.id===id);
+  if(!text||!t||t.estado!=='aceptada') return;
+  t.msgs.push({from:who,text:text});
+  writeJSON('ys_tickets',all);renderAll();
+}
+function setEstado(id,estado){
+  if(!isAdmin()) return;
+  const all=readJSON('ys_tickets');const t=all.find(x=>x.id===id);
+  if(!t) return;
+  t.estado=estado;
+  if(estado==='aceptada') t.msgs.push({from:'sistema',text:'Cita aceptada. Desde aquí podéis hablar sobre los detalles.'});
+  writeJSON('ys_tickets',all);renderAll();
+}
+function renderMine(){
+  const ids=readJSON('ys_mine');const all=readJSON('ys_tickets').filter(t=>ids.includes(t.id));
+  const box=document.getElementById('mytickets');
+  if(!all.length){box.innerHTML='<p>Todavía no tienes citas. <a href="#" onclick="showSection(\'reservar\');return false;">Reserva la primera</a>.</p>';return;}
+  box.innerHTML=all.slice().reverse().map(t=>{
+    let extra='<p style="font-size:.9rem">Estamos revisando tu solicitud.</p>';
+    if(t.estado==='aceptada') extra=chatHtml(t,'cliente');
+    if(t.estado==='rechazada') extra='<p style="font-size:.9rem">No hemos podido aceptar esta fecha. Escríbenos desde Contacto y buscamos otra.</p>';
+    return '<div class="tk"><h4>'+esc(t.estilo)+'<span class="badge '+t.estado+'">'+ESTADO[t.estado]+'</span></h4><div class="tk-meta">'+esc(t.fecha)+', '+esc(t.hora)+'. Ref. '+esc(t.id)+'</div>'+extra+'</div>';
+  }).join('');
+}
+function renderAdmin(){
+  const ok=isAdmin();
+  document.getElementById('adminGate').classList.toggle('hidden',ok);
+  document.getElementById('adminPanel').classList.toggle('hidden',!ok);
+  const list=document.getElementById('adminTickets'),fl=document.getElementById('adminFilters');
+  if(!ok){list.innerHTML='';fl.innerHTML='';return;}
+  const all=readJSON('ys_tickets');
+  fl.innerHTML=Object.keys(ESTADO).map(k=>'<button class="btn '+(k===adminFilter?'':'btn-ghost')+'" onclick="adminFilter=\''+k+'\';renderAdmin()">'+ESTADO[k]+'s ('+all.filter(t=>t.estado===k).length+')</button>').join('');
+  const shown=all.filter(t=>t.estado===adminFilter).reverse();
+  list.innerHTML=shown.length?shown.map(t=>{
+    let extra='<div class="tk-actions"><button class="btn" onclick="setEstado(\''+t.id+'\',\'aceptada\')">Aceptar</button><button class="btn btn-ghost" onclick="setEstado(\''+t.id+'\',\'rechazada\')">Rechazar</button></div>';
+    if(t.estado==='aceptada') extra=chatHtml(t,'admin');
+    if(t.estado==='rechazada') extra='';
+    return '<div class="tk"><h4>'+esc(t.nombre)+'<span class="badge '+t.estado+'">'+ESTADO[t.estado]+'</span></h4><div class="tk-meta">'+esc(t.estilo)+', '+esc(t.fecha)+' a las '+esc(t.hora)+'<br>'+esc(t.email)+'</div><p style="font-size:.9rem">'+esc(t.idea||'Sin descripción')+'</p>'+extra+'</div>';
+  }).join(''):'<p style="margin-top:18px">No hay citas en esta lista.</p>';
+  document.querySelectorAll('.msgs').forEach(m=>m.scrollTop=m.scrollHeight);
+}
+function renderAll(){renderMine();renderAdmin();document.querySelectorAll('.msgs').forEach(m=>m.scrollTop=m.scrollHeight);}
+function adminLogout(){try{sessionStorage.removeItem('ys_admin');}catch(e){}renderAll();}
+document.getElementById('loginForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const ok=(await sha(document.getElementById('aPass').value))===ADMIN_HASH;
+  const err=document.getElementById('loginErr');
+  if(ok){try{sessionStorage.setItem('ys_admin','1');}catch(x){}err.classList.remove('show');this.reset();renderAll();}
+  else err.classList.add('show');
+});
+window.addEventListener('storage',renderAll);
+renderCats();renderSvc();renderStore();renderCart();renderAll();
+const startId=(location.hash||'#inicio').slice(1);
+showSection(document.getElementById(startId)?startId:'inicio');
+document.getElementById('bFecha').min=new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
